@@ -14,7 +14,6 @@ class Telegram::Bot::MassageClubBot
         when Telegram::Bot::Types::CallbackQuery
           chat_id         = JSON.parse(message.to_json)['message']['chat']['id']
           selected_option = JSON.parse(message.to_json)['data']
-          full_name = JSON.parse(message.to_json)['message']['from']['first_name'] + JSON.parse(message.to_json)['message']['from']['last_name']
         end
         begin
           case selected_option
@@ -22,6 +21,7 @@ class Telegram::Bot::MassageClubBot
             markdown_menu(bot, chat_id, true)
           else
             if selected_option == '/be_so_1' || selected_option == '/be_so_2' || selected_option == '/be_so_3'
+              full_name = JSON.parse(message.to_json)['message']['from']['first_name'].to_s + JSON.parse(message.to_json)['message']['from']['last_name'].to_s
               bot.api.send_message(chat_id:, text: "👋 Hi Anh trai #{full_name} - Đây là danh sách hình ảnh #{format_callback_data(selected_option)}")
               selected_option_formatted = selected_option[1..-1]
               bot.api.send_media_group(
