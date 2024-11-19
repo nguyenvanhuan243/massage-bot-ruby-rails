@@ -73,7 +73,7 @@ class Telegram::Bot::MassageClubBot
   def be_so_1_content
     [
       {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: '🔥🔥 Danh sách các bé số 1 đây ạ 💔'
+        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
       },
       {
         type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
