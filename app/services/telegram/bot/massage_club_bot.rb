@@ -1,18 +1,19 @@
 require 'telegram/bot'
 class Telegram::Bot::MassageClubBot
   def push
+    chat_id = nil
+    selected_option = nil
     telegram_bot_token = '7094752420:AAFP5_dXlxSe0DCVuwChyrVECKRUXEV75xs'
     Telegram::Bot::Client.run(telegram_bot_token) do |bot|
       puts 'BOT is Running, plz select menu Coin'
       bot.listen do |message|
-        chat_id = nil
-        selected_option = nil
-        begin
-          chat_id         = JSON.parse(message.to_json)['message']['chat']['id']
-          selected_option = JSON.parse(message.to_json)['message']['reply_markup']['inline_keyboard'].first.first['callback_data']
-        rescue
+        case message
+        when Telegram::Bot::Types::Message
           chat_id         = JSON.parse(message.to_json)['chat']['id']
           selected_option = JSON.parse(message.to_json)['text']
+        when Telegram::Bot::Types::CallbackQuery
+          chat_id         = JSON.parse(message.to_json)['message']['chat']['id']
+          selected_option = JSON.parse(message.to_json)['message']['reply_markup']['inline_keyboard'].first.first['callback_data']
         end
         puts "######################## Customer are selecting #{selected_option}"
         begin
