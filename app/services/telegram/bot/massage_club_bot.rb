@@ -13,25 +13,25 @@ class Telegram::Bot::MassageClubBot
           when '/start'
             markdown_menu(bot, chat_id)
           when '/beso1'
-            bot.api.send_message(chat_id: chat_id, text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 1')
+            bot.api.send_message(chat_id:, text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 1')
             bot.api.send_media_group(
-              chat_id: chat_id,
+              chat_id:,
               media: be_so_1_content
             )
             markdown_menu(bot, chat_id)
           when '/beso2'
-            bot.api.send_message(chat_id: chat_id,
+            bot.api.send_message(chat_id:,
                                  text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 2')
             bot.api.send_media_group(
-              chat_id: chat_id,
+              chat_id:,
               media: be_so_2_content
             )
             markdown_menu(bot, chat_id)
           when '/beso3'
-            bot.api.send_message(chat_id: chat_id,
+            bot.api.send_message(chat_id:,
                                  text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 3')
             bot.api.send_media_group(
-              chat_id: chat_id,
+              chat_id:,
               media: be_so_3_content
             )
             markdown_menu(bot, chat_id)
@@ -47,7 +47,7 @@ class Telegram::Bot::MassageClubBot
 
   def markdown_menu(bot, chat_id)
     bot.api.send_message(
-      chat_id: chat_id,
+      chat_id:,
       text: '🎉🎉 **Chào mừng anh trai đến với cộng đồng Massage Club ạ, mời anh trai chọn bé ạ** 🎉🎉',
       parse_mode: 'Markdown',
       reply_markup: markdown_buttons
@@ -64,7 +64,7 @@ class Telegram::Bot::MassageClubBot
         Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 3', callback_data: '/beso3')
       ],
       [
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: '🏡 Quay lại nhóm', url: 'https://t.me/massagetesting'),
+        Telegram::Bot::Types::InlineKeyboardButton.new(text: '🏡 Quay lại nhóm', url: 'https://t.me/massagetesting')
       ]
     ]
     Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
