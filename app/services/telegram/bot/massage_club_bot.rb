@@ -21,7 +21,7 @@ class Telegram::Bot::MassageClubBot
           when '/start'
             markdown_menu(bot, chat_id, true)
           else
-            bot.api.send_message(chat_id:, text: "👋 Hi Anh trai - Đây là danh sách hình ảnh #{selected_option}")
+            bot.api.send_message(chat_id:, text: "👋 Hi Anh trai - Đây là danh sách hình ảnh #{format_callback_data(selected_option)}")
             bot.api.send_media_group(
               chat_id:,
               media: public_send("#{selected_option}_content")
@@ -46,6 +46,12 @@ class Telegram::Bot::MassageClubBot
       parse_mode: 'Markdown',
       reply_markup: markdown_buttons
     )
+  end
+
+  def format_callback_data(text)
+    return "bé số 1" if text == "/be_so_1"
+    return "bé số 2" if text == "/be_so_2"
+    return "bé số 3" if text == "/be_so_3"
   end
 
   def markdown_buttons
