@@ -8,6 +8,8 @@ gem "rails", "~> 7.1.5"
 # telegram-bot-ruby
 gem "telegram-bot-ruby"
 
+gem "sqlite3"
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
