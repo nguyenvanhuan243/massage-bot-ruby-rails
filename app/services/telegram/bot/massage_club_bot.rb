@@ -3,7 +3,7 @@ class Telegram::Bot::MassageClubBot
   def push
     chat_id = nil
     selected_option = nil
-    telegram_bot_token = '7094752420:AAFP5_dXlxSe0DCVuwChyrVECKRUXEV75xs'
+    telegram_bot_token = ENV["MESSAGE_BOT_TOKEN"] || "7239485937:AAGznbziI5AY_Q9GMMyiv1kPoskqDg1Y5QU"
     Telegram::Bot::Client.run(telegram_bot_token) do |bot|
       puts 'BOT is Running, plz select menu Coin'
       bot.listen do |message|
@@ -13,21 +13,24 @@ class Telegram::Bot::MassageClubBot
           selected_option = JSON.parse(message.to_json)['text']
         when Telegram::Bot::Types::CallbackQuery
           chat_id         = JSON.parse(message.to_json)['message']['chat']['id']
-          selected_option = JSON.parse(message.to_json)['message']['reply_markup']['inline_keyboard'].first.first['callback_data']
+          selected_option = JSON.parse(message.to_json)['data']
         end
-        puts "######################## Customer are selecting #{selected_option}"
         begin
           case selected_option
           when '/start'
             markdown_menu(bot, chat_id, true)
           else
-            bot.api.send_message(chat_id:, text: "👋 Hi Anh trai - Đây là danh sách hình ảnh #{format_callback_data(selected_option)}")
-            selected_option_formatted = selected_option[1..-1]
-            bot.api.send_media_group(
-              chat_id:,
-              media: send("#{selected_option_formatted}_content")
-            )
-            markdown_menu(bot, chat_id)
+            if selected_option == '/be_so_1' || selected_option == '/be_so_2' || selected_option == '/be_so_3'
+              bot.api.send_message(chat_id:, text: "👋 Hi Anh trai - Đây là danh sách hình ảnh #{format_callback_data(selected_option)}")
+              selected_option_formatted = selected_option[1..-1]
+              bot.api.send_media_group(
+                chat_id:,
+                media: send("#{selected_option_formatted}_content")
+              )
+              markdown_menu(bot, chat_id)
+            else
+              puts "Invalid data with #{selected_option}"
+            end
           end
         rescue StandardError => e
           puts "Error #{e}"
@@ -67,6 +70,9 @@ class Telegram::Bot::MassageClubBot
       ],
       [
         Telegram::Bot::Types::InlineKeyboardButton.new(text: '🏡 Quay lại nhóm', url: 'https://t.me/massagetesting')
+      ],
+      [
+        Telegram::Bot::Types::InlineKeyboardButton.new(text: 'Switch to inline', switch_inline_query: 'some text')
       ]
     ]
     Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
@@ -179,4 +185,4 @@ class Telegram::Bot::MassageClubBot
 end
 
 # bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production & rails runner Telegram::Bot::MassageClubBot.new.push;
-# get chat_id: https://api.telegram.org/bot7094752420:AAFP5_dXlxSe0DCVuwChyrVECKRUXEV75xs/getUpdates
+# get chat_id: https://api.telegram.org/bot7239485937:AAGznbziI5AY_Q9GMMyiv1kPoskqDg1Y5QU/getUpdates
