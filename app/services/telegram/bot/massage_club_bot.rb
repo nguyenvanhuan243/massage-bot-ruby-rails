@@ -5,9 +5,8 @@ class Telegram::Bot::MassageClubBot
     Telegram::Bot::Client.run(telegram_bot_token) do |bot|
       puts 'BOT is Running, plz select menu Coin'
       bot.listen do |message|
-        bot_message = JSON.parse(message.to_json)['message']
-        chat_id = bot_message['chat']['id']
-        selected_option = bot_message['reply_markup']['inline_keyboard'].first.first['callback_data']
+        chat_id = JSON.parse(message.to_json)['message']['chat']['id']
+        selected_option = JSON.parse(message.to_json)['message']['reply_markup']['inline_keyboard'].first.first['callback_data']
         puts "######################## Customer are selecting #{selected_option}"
         begin
           case selected_option
