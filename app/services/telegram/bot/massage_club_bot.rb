@@ -70,9 +70,6 @@ class Telegram::Bot::MassageClubBot
       ],
       [
         Telegram::Bot::Types::InlineKeyboardButton.new(text: '🏡 Quay lại nhóm', url: 'https://t.me/massagetesting')
-      ],
-      [
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: 'Switch to inline', switch_inline_query: 'some text')
       ]
     ]
     Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
