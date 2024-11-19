@@ -22,10 +22,10 @@ class Telegram::Bot::MassageClubBot
             markdown_menu(bot, chat_id, true)
           else
             bot.api.send_message(chat_id:, text: "👋 Hi Anh trai - Đây là danh sách hình ảnh #{format_callback_data(selected_option)}")
-            selected_option_formatted = selected_option["1..-1"]
+            selected_option_formatted = selected_option[1..-1]
             bot.api.send_media_group(
               chat_id:,
-              media: public_send("#{selected_option_formatted}_content")
+              media: send("#{selected_option_formatted}_content")
             )
             markdown_menu(bot, chat_id)
           end
