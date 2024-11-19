@@ -78,7 +78,7 @@ class Telegram::Bot::MassageClubBot
       ],
       [
         Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 3', callback_data: '/beso3'),
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: '🏡 Book Bé', url: 'https://t.me/massagetesting')
+        Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé', url: 'https://t.me/massagetesting')
       ],
       [
         Telegram::Bot::Types::InlineKeyboardButton.new(text: '🏡 Quay lại nhóm', url: 'https://t.me/massagetesting')
