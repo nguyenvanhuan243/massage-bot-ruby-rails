@@ -7,6 +7,7 @@ class Telegram::Bot::MassageClubBot
       bot.listen do |message|
         chat_id = JSON.parse(message.to_json)['message']['chat']['id']
         selected_option = JSON.parse(message.to_json)['message']['reply_markup']['inline_keyboard'].first.first['callback_data']
+        puts "######################## Customer are selecting #{selected_option}"
         begin
           case selected_option
           when '/start'
