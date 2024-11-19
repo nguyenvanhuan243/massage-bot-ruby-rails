@@ -21,7 +21,7 @@ class Telegram::Bot::MassageClubBot
             markdown_menu(bot, chat_id, true)
           else
             if selected_option == '/be_so_1' || selected_option == '/be_so_2' || selected_option == '/be_so_3'
-              from = JSON.parse(message.to_json)['message']['from']
+              from = JSON.parse(message.to_json)['from']
               full_name = from['first_name'].to_s + from['last_name'].to_s
               bot.api.send_message(chat_id:, text: "👋 Hi Anh trai #{full_name} - Đây là danh sách hình ảnh #{format_callback_data(selected_option)}")
               selected_option_formatted = selected_option[1..-1]
