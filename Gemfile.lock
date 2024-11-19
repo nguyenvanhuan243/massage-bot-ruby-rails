@@ -150,7 +150,7 @@ GEM
     mutex_m (0.2.0)
     net-http (0.5.0)
       uri
-    net-imap (0.4.18)
+    net-imap (0.5.1)
       date
       net-protocol
     net-pop (0.1.2)
@@ -160,6 +160,14 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.4)
+    nokogiri (1.16.7-aarch64-linux)
+      racc (~> 1.4)
+    nokogiri (1.16.7-arm-linux)
+      racc (~> 1.4)
+    nokogiri (1.16.7-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.7-x86-linux)
+      racc (~> 1.4)
     nokogiri (1.16.7-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
@@ -206,7 +214,7 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rake (13.2.1)
-    rdoc (6.7.0)
+    rdoc (6.8.0)
       psych (>= 4.0.0)
     reline (0.5.11)
       io-console (~> 0.5)
@@ -233,7 +241,11 @@ GEM
     zeitwerk (2.6.18)
 
 PLATFORMS
-  x86_64-darwin-21
+  aarch64-linux
+  arm-linux
+  arm64-darwin
+  x86-linux
+  x86_64-darwin
   x86_64-linux
 
 DEPENDENCIES
@@ -249,4 +261,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.4.21
+   2.5.21
