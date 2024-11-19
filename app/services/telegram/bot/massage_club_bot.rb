@@ -19,28 +19,12 @@ class Telegram::Bot::MassageClubBot
         begin
           case selected_option
           when '/start'
-            markdown_menu_start(bot, chat_id)
-          when '/beso1'
-            bot.api.send_message(chat_id:, text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 1')
+            markdown_menu(bot, chat_id, true)
+          else
+            bot.api.send_message(chat_id:, text: "👋 Hi Anh trai - Đây là danh sách hình ảnh #{selected_option}")
             bot.api.send_media_group(
               chat_id:,
-              media: be_so_1_content
-            )
-            markdown_menu(bot, chat_id)
-          when '/beso2'
-            bot.api.send_message(chat_id:,
-                                 text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 2')
-            bot.api.send_media_group(
-              chat_id:,
-              media: be_so_2_content
-            )
-            markdown_menu(bot, chat_id)
-          when '/beso3'
-            bot.api.send_message(chat_id:,
-                                 text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 3')
-            bot.api.send_media_group(
-              chat_id:,
-              media: be_so_3_content
+              media: public_send("#{selected_option}_content")
             )
             markdown_menu(bot, chat_id)
           end
@@ -53,19 +37,12 @@ class Telegram::Bot::MassageClubBot
 
   private
 
-  def markdown_menu_start(bot, chat_id)
+  def markdown_menu(bot, chat_id, start = false)
+    text = '🎉🎉 ** Massage Club mời anh trai chọn bé khác nếu chưa hài lòng ạ ** 🎉🎉'
+    text = '🎉🎉 ** Massage Club xin chào, mời anh trai chọn bé ạ ** 🎉🎉' if start
     bot.api.send_message(
       chat_id:,
-      text: '🎉🎉 ** Massage Club xin chào, mời anh trai chọn bé ạ ** 🎉🎉',
-      parse_mode: 'Markdown',
-      reply_markup: markdown_buttons
-    )
-  end
-
-  def markdown_menu(bot, chat_id)
-    bot.api.send_message(
-      chat_id:,
-      text: '🎉🎉 ** Massage Club mời anh trai chọn bé khác nếu chưa hài lòng ạ ** 🎉🎉',
+      text: text,
       parse_mode: 'Markdown',
       reply_markup: markdown_buttons
     )
@@ -74,11 +51,11 @@ class Telegram::Bot::MassageClubBot
   def markdown_buttons
     kb = [
       [
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 1', callback_data: '/beso1'),
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 2', callback_data: '/beso2')
+        Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 1', callback_data: '/be_so_1'),
+        Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 2', callback_data: '/be_so_2')
       ],
       [
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 3', callback_data: '/beso3'),
+        Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 3', callback_data: '/be_so_3'),
         Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé', url: 'https://t.me/massagetesting')
       ],
       [
