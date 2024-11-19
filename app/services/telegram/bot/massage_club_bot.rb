@@ -5,13 +5,20 @@ class Telegram::Bot::MassageClubBot
     Telegram::Bot::Client.run(telegram_bot_token) do |bot|
       puts 'BOT is Running, plz select menu Coin'
       bot.listen do |message|
-        chat_id = JSON.parse(message.to_json)['chat']['id']
-        selected_option = JSON.parse(message.to_json)['reply_markup']['inline_keyboard'].first.first['callback_data']
+        chat_id = nil
+        selected_option = nil
+        begin
+          chat_id = JSON.parse(message.to_json)['message']['chat']['id']
+          selected_option = JSON.parse(message.to_json)['message']['reply_markup']['inline_keyboard'].first.first['callback_data']
+        rescue
+          chat_id = JSON.parse(message.to_json)['chat']['id']
+          selected_option = JSON.parse(message.to_json)['text']
+        end
         puts "######################## Customer are selecting #{selected_option}"
         begin
           case selected_option
           when '/start'
-            markdown_menu(bot, chat_id)
+            markdown_menu_start(bot, chat_id)
           when '/beso1'
             bot.api.send_message(chat_id:, text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 1')
             bot.api.send_media_group(
@@ -45,10 +52,19 @@ class Telegram::Bot::MassageClubBot
 
   private
 
-  def markdown_menu(bot, chat_id)
+  def markdown_menu_start(bot, chat_id)
     bot.api.send_message(
       chat_id:,
       text: '🎉🎉 ** Massage Club xin chào, mời anh trai chọn bé ạ ** 🎉🎉',
+      parse_mode: 'Markdown',
+      reply_markup: markdown_buttons
+    )
+  end
+
+  def markdown_menu(bot, chat_id)
+    bot.api.send_message(
+      chat_id:,
+      text: '🎉🎉 ** Massage Club mời anh trai chọn bé khác nếu chưa hài lòng ạ ** 🎉🎉',
       parse_mode: 'Markdown',
       reply_markup: markdown_buttons
     )
