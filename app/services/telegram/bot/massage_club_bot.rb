@@ -13,7 +13,7 @@ class Telegram::Bot::MassageClubBot
           when '/start'
             markdown_menu(bot, chat_id)
           when '/beso1'
-            bot.api.send_message(chat_id: chat_id, text: '👋 Hi Anh trai - Đây là danh sách các bé số 1')
+            bot.api.send_message(chat_id: chat_id, text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 1')
             bot.api.send_media_group(
               chat_id: chat_id,
               media: be_so_1_content
@@ -21,7 +21,7 @@ class Telegram::Bot::MassageClubBot
             markdown_menu(bot, chat_id)
           when '/beso2'
             bot.api.send_message(chat_id: chat_id,
-                                 text: '👋 Hi Anh trai - Đây là danh sách các bé số 2')
+                                 text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 2')
             bot.api.send_media_group(
               chat_id: chat_id,
               media: be_so_2_content
@@ -29,7 +29,7 @@ class Telegram::Bot::MassageClubBot
             markdown_menu(bot, chat_id)
           when '/beso3'
             bot.api.send_message(chat_id: chat_id,
-                                 text: '👋 Hi Anh trai - Đây là danh sách các bé số 3')
+                                 text: '👋 Hi Anh trai - Đây là danh sách hình ảnh bé số 3')
             bot.api.send_media_group(
               chat_id: chat_id,
               media: be_so_3_content
