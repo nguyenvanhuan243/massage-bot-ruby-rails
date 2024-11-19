@@ -53,9 +53,11 @@ class Telegram::Bot::MassageClubBot
   end
 
   def format_callback_data(text)
-    return "bé số 1" if text == "/be_so_1"
-    return "bé số 2" if text == "/be_so_2"
-    return "bé số 3" if text == "/be_so_3"
+    {
+      "/be_so_1" => "bé số 1",
+      "/be_so_2" => "bé số 2",
+      "/be_so_3" => "bé số 3"
+    }[text]
   end
 
   def markdown_buttons
@@ -75,110 +77,22 @@ class Telegram::Bot::MassageClubBot
     Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
   end
 
+  def generate_content(base_url, caption)
+    Array.new(10) { { type: 'photo', media: base_url, caption: caption } }
+  end
+
   def be_so_1_content
-    [
-      {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/2MTRvrZ/be-so-1.png', caption: 'Bé số 1'
-      }
-    ].to_json
+    generate_content('https://i.ibb.co/2MTRvrZ/be-so-1.png', 'Bé số 1').to_json
   end
 
   def be_so_2_content
-    [
-      {
-        type: 'photo', media: 'https://i.ibb.co/mRf21D6/be-so-2.png', caption: 'Bé số 2'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/mRf21D6/be-so-2.png', caption: 'Bé số 2'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/mRf21D6/be-so-2.png', caption: 'Bé số 2'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/mRf21D6/be-so-2.png', caption: 'Bé số 2'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/mRf21D6/be-so-2.png', caption: 'Bé số 2'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/mRf21D6/be-so-2.png', caption: 'Bé số 2'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/mRf21D6/be-so-2.png', caption: 'Bé số 2'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/mRf21D6/be-so-2.png', caption: 'Bé số 2'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/mRf21D6/be-so-2.png', caption: 'Bé số 2'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/mRf21D6/be-so-2.png', caption: 'Bé số 2'
-      }
-    ].to_json
+    generate_content('https://i.ibb.co/mRf21D6/be-so-2.png', 'Bé số 2').to_json
   end
 
   def be_so_3_content
-    [
-      {
-        type: 'photo', media: 'https://i.ibb.co/f2GTyPH/be-so-3.png', caption: 'Bé số 3'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/f2GTyPH/be-so-3.png', caption: 'Bé số 3'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/f2GTyPH/be-so-3.png', caption: 'Bé số 3'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/f2GTyPH/be-so-3.png', caption: 'Bé số 3'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/f2GTyPH/be-so-3.png', caption: 'Bé số 3'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/f2GTyPH/be-so-3.png', caption: 'Bé số 3'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/f2GTyPH/be-so-3.png', caption: 'Bé số 3'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/f2GTyPH/be-so-3.png', caption: 'Bé số 3'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/f2GTyPH/be-so-3.png', caption: 'Bé số 3'
-      },
-      {
-        type: 'photo', media: 'https://i.ibb.co/f2GTyPH/be-so-3.png', caption: 'Bé số 3'
-      }
-    ].to_json
+    generate_content('https://i.ibb.co/f2GTyPH/be-so-3.png', 'Bé số 3').to_json
   end
+
 end
 
 # bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production & rails runner Telegram::Bot::MassageClubBot.new.push;
