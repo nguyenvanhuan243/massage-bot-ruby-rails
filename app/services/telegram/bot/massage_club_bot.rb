@@ -49,7 +49,7 @@ class Telegram::Bot::MassageClubBot
   def markdown_menu(bot, chat_id)
     bot.api.send_message(
       chat_id:,
-      text: '🎉🎉 **Chào mừng anh trai đến với cộng đồng Massage Club ạ, mời anh trai chọn bé ạ** 🎉🎉',
+      text: '🎉🎉 ** Massage Club xin chào, mời anh trai chọn bé ạ ** 🎉🎉',
       parse_mode: 'Markdown',
       reply_markup: markdown_buttons
     )
