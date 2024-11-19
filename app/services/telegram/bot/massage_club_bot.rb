@@ -36,7 +36,7 @@ class Telegram::Bot::MassageClubBot
               markdown_menu(bot, chat_id)
             else
               puts "Invalid data with #{selected_option}"
-              markdown_menu(bot, chat_id)
+              # markdown_menu(bot, chat_id)
             end
           end
         rescue StandardError => e
