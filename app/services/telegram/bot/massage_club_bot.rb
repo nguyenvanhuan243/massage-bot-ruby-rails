@@ -1,5 +1,8 @@
 require 'telegram/bot'
 class Telegram::Bot::MassageClubBot
+  def initialize
+    @current_selected_option = ""
+  end
   def push
     chat_id = nil
     selected_option = nil
@@ -21,9 +24,10 @@ class Telegram::Bot::MassageClubBot
             markdown_menu(bot, chat_id, true)
           else
             if selected_option == '/be_so_1' || selected_option == '/be_so_2' || selected_option == '/be_so_3'
+              @current_selected_option = selected_option
               from = JSON.parse(message.to_json)['from']
               full_name = from['first_name'].to_s + " " + from['last_name'].to_s
-              bot.api.send_message(chat_id:, text: "👋 Hi Anh trai #{full_name} - Đây là danh sách hình ảnh #{format_callback_data(selected_option)}")
+              bot.api.send_message(chat_id:, text: "👋 Hi Anh trai #{full_name} - Đây là danh sách hình ảnh #{format_callback_data(@current_selected_option)}")
               selected_option_formatted = selected_option[1..-1]
               bot.api.send_media_group(
                 chat_id:,
@@ -64,19 +68,35 @@ class Telegram::Bot::MassageClubBot
   end
 
   def markdown_buttons
-    kb = [
-      [
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 1', callback_data: '/be_so_1'),
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 2', callback_data: '/be_so_2')
-      ],
-      [
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 3', callback_data: '/be_so_3'),
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé', url: 'https://t.me/massagetesting')
-      ],
-      [
-        Telegram::Bot::Types::InlineKeyboardButton.new(text: '🏡 Quay lại nhóm', url: 'https://t.me/massagetesting')
+    current_selected_option = format_callback_data(@current_selected_option)
+    kb = []
+    if current_selected_option.present?
+      kb = [
+        [
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 1', callback_data: '/be_so_1'),
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 2', callback_data: '/be_so_2')
+        ],
+        [
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 3', callback_data: '/be_so_3'),
+          # Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé', url: 'https://t.me/massagetesting'),
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé', switch_inline_query: "Chào admin, mình muốn book #{current_selected_option}")
+        ],
+        [
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '🏡 Quay lại nhóm', url: 'https://t.me/massagetesting')
+        ]
       ]
-    ]
+    else
+      kb = [
+        [
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 1', callback_data: '/be_so_1'),
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 2', callback_data: '/be_so_2')
+        ],
+        [
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 3', callback_data: '/be_so_3'),
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '🏡 Quay lại nhóm', url: 'https://t.me/massagetesting')
+        ]
+      ]
+    end
     Telegram::Bot::Types::InlineKeyboardMarkup.new(inline_keyboard: kb)
   end
 
