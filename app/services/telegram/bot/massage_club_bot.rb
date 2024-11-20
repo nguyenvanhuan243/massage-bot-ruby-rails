@@ -99,7 +99,7 @@ class Telegram::Bot::MassageClubBot
         ],
         [
           Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 3', callback_data: '/be_so_3'),
-          Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé (Nhắn admin)', url: "https://t.me/huancapital")
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book (Nhắn admin)', url: "https://t.me/huancapital")
           # Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé (Nhắn Admin)', switch_inline_query: "Chào admin, mình muốn book #{current_selected_option}")
         ],
         [
