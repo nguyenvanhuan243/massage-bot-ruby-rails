@@ -21,10 +21,6 @@ jobs:
         with:
           ruby-version: 3.1.2
           bundler-cache: false # Caches gems for faster builds
-  
-      - name: Install gem
-        run: |
-          bundle install
 
       # Step 3: Deploy if the push is to master
       - name: Trigger Deploy
