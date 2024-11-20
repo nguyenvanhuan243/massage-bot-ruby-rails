@@ -1,20 +1,29 @@
 name: "Ruby on Rails CI"
+
 on:
   push:
     branches: ["master"]
   pull_request:
     branches: ["master"]
+
 jobs:
   lint:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
+
+      # Step 2: Set up Ruby and install dependencies
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
+        uses: ruby/setup-ruby@v1
         with:
-          bundler-cache: true
+          ruby-version: 3.1.2
+          bundler-cache: true # Caches gems for faster builds
+
+      # Step 3: Deploy if the push is to master
       - name: Trigger Deploy
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         run: |
           curl -s https://api.render.com/deploy/srv-csu1sjlumphs738kicig?key=kT4m5lDQnHA
