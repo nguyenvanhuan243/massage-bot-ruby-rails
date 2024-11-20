@@ -3,6 +3,27 @@ class Telegram::Bot::MassageClubBot
   def initialize
     @current_selected_option = ""
   end
+
+  def get_admins(bot, chat_id)
+    response = bot.api.get_chat_administrators(chat_id:)
+    users = JSON.parse(response.to_json)
+    administrator = []
+    creators = []
+    users.each do |user|
+      if user["status"] == "administrator" && !user["user"]["is_bot"]
+        administrator.push(user["user"]["username"])
+      end
+
+      if user["status"] == "creator" && !user["user"]["is_bot"]
+        creators.push(user["user"]["username"])
+      end
+    end
+    admin = [administrator, creators].flatten
+    @admin = admin&.last
+  rescue StandardError => e
+    "Failed to fetch admins: #{e.message}"
+  end
+
   def push
     chat_id = nil
     selected_option = nil
@@ -78,8 +99,8 @@ class Telegram::Bot::MassageClubBot
         ],
         [
           Telegram::Bot::Types::InlineKeyboardButton.new(text: '💔 Hình bé số 3', callback_data: '/be_so_3'),
-          # Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé', url: 'https://t.me/massagetesting'),
-          Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé', switch_inline_query: "Chào admin, mình muốn book #{current_selected_option}")
+          Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé (Nhắn admin)', url: "https://t.me/huancapital")
+          # Telegram::Bot::Types::InlineKeyboardButton.new(text: '🆗 Book Bé (Nhắn Admin)', switch_inline_query: "Chào admin, mình muốn book #{current_selected_option}")
         ],
         [
           Telegram::Bot::Types::InlineKeyboardButton.new(text: '🏡 Quay lại nhóm', url: 'https://t.me/massagetesting')
@@ -117,6 +138,3 @@ class Telegram::Bot::MassageClubBot
   end
 
 end
-
-# bundle exec sidekiq -d -L log/sidekiq.log -C config/sidekiq.yml -e production & rails runner Telegram::Bot::MassageClubBot.new.push;
-# get chat_id: https://api.telegram.org/bot7239485937:AAGznbziI5AY_Q9GMMyiv1kPoskqDg1Y5QU/getUpdates
