@@ -219,12 +219,6 @@ GEM
     reline (0.5.11)
       io-console (~> 0.5)
     securerandom (0.3.2)
-    sqlite3 (2.2.0-aarch64-linux-gnu)
-    sqlite3 (2.2.0-arm-linux-gnu)
-    sqlite3 (2.2.0-arm64-darwin)
-    sqlite3 (2.2.0-x86-linux-gnu)
-    sqlite3 (2.2.0-x86_64-darwin)
-    sqlite3 (2.2.0-x86_64-linux-gnu)
     stringio (3.1.2)
     telegram-bot-ruby (2.0.0)
       dry-struct (~> 1.6)
@@ -259,7 +253,6 @@ DEPENDENCIES
   debug
   puma (>= 5.0)
   rails (~> 7.1.5)
-  sqlite3
   telegram-bot-ruby
   tzinfo-data
   web-console
